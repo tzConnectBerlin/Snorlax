@@ -1,4 +1,4 @@
-#include "../common.mligo"
+#include "./common.mligo"
 
 let pack_nat_2_nat_function ( f : nat_2_nat ) : bytes =
 	Bytes.pack(f)

@@ -1,4 +1,4 @@
-#include "../common.mligo"
+#include "./common.mligo"
 #include "./lambda_compile_helper.mligo"
 
 let add : nat_nat_2_nat = fun (a, b : nat * nat) ->
