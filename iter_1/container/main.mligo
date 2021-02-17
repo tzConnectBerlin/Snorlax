@@ -1,17 +1,6 @@
-type storage = nat
+#include "../common/common.mligo"
 
-type container_storage =
-[@layout:comb]
-{
-	creator : address;
-	is_sealed : bool;
-	lambda_repository : ( string, bytes ) big_map;
-	storage : storage;
-}
-
-type lambda_id = string
-
-type endpoint_argument = nat
+let err_CONTRACT_SEALED = "Access denied: contract sealed"
 
 type packed_lambda =
 [@layout:comb]
@@ -23,20 +12,14 @@ type packed_lambda =
 type endpoint_params =
 [@layout:comb]
 {
-	name : string;
+	name : lambda_id;
 	argument : endpoint_argument
 }
-
-type endpoint_lambda = ( endpoint_argument * container_storage ) -> ( operation list * container_storage )
 
 type main_action =
 	| InstallLambda of packed_lambda
 	| SealContract of unit
 	| CallEndpoint of endpoint_params
-
-let err_CONTRACT_SEALED = "Access denied: contract sealed"
-let err_NO_SUCH_LAMBDA = "No such lambda"
-let err_INVALID_LAMBDA = "Invalid lambda type"
 
 let assert_not_sealed ( container_storage : container_storage ) : unit =
 	if (container_storage.is_sealed) then
@@ -54,12 +37,7 @@ let seal_contract ( u, container_storage : unit * container_storage ) : operatio
 	( [] : operation list ), { container_storage with is_sealed = true }
 
 let call_endpoint_lambda ( endpoint_params, container_storage : endpoint_params * container_storage ) : operation list * container_storage =
-	let packed_code = match Big_map.find_opt ( endpoint_params.name ) container_storage.lambda_repository with
-	| None -> ( failwith err_NO_SUCH_LAMBDA : bytes )
-	| Some e -> e in
-	let lambda = match ( ( Bytes.unpack packed_code ) : endpoint_lambda option ) with
-	| None -> ( failwith err_INVALID_LAMBDA : endpoint_lambda )
-	| Some e -> e in
+	let lambda = unpack_endpoint_lambda ( endpoint_params.name, container_storage.lambda_repository ) in
 	lambda ( endpoint_params.argument, container_storage )
 	
 let main ( action, container_storage : main_action * container_storage) : operation list * container_storage =
