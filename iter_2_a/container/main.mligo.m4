@@ -43,6 +43,6 @@ let main ( action, container_storage : main_action * container_storage) : operat
 	let lambda_map = container_storage.lambda_repository.lambda_map in
 	match action with
 	| Installer params -> installer_dispatch ( params, container_storage )
-	| Add params -> run_addish_endpoint_lambda ( "add", lambda_map, ( params, container_storage ) )
-	| AddDouble params -> run_addish_endpoint_lambda ( "add_double", lambda_map, ( params, container_storage ) )
-	| Ratio params -> run_ratioish_endpoint_lambda ( "ratio", lambda_map, ( params, container_storage ) )
+	| Add params -> run_endpoint_lambda ( "add", lambda_map, ( Bytes.pack params, container_storage ) )
+	| AddDouble params -> run_endpoint_lambda ( "add_double", lambda_map, ( Bytes.pack params, container_storage ) )
+	| Ratio params -> run_endpoint_lambda ( "ratio", lambda_map, ( Bytes.pack params, container_storage ) )

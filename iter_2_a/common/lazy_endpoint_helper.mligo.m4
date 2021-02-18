@@ -12,7 +12,9 @@ type container_storage =
 	storage : storage;
 }
 
-DECLARE_LAMBDA(«addish_endpoint», «( add_params * container_storage )», «( operation list * container_storage )») m4_dnl
-DECLARE_LAMBDA(«ratioish_endpoint», «( ratio_params * container_storage )», «( operation list * container_storage )») m4_dnl)
+LAZY_TYPE(add_params)
+LAZY_TYPE(ratio_params)
+
+DECLARE_LAMBDA(«endpoint», «( bytes * container_storage )», «( operation list * container_storage )») m4_dnl
 
 ») m4_dnl
