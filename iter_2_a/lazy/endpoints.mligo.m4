@@ -14,7 +14,7 @@ let add_double_endpoint : endpoint_lambda = fun ( argument, container_storage : 
 	let argument = unpack_add_params argument in
 	let lambda_map = container_storage.lambda_repository.lambda_map in
 	let double = argument * 2n in
-	run_endpoint_lambda ( "add", lambda_map, ( Bytes.pack double, container_storage ) )
+	run_endpoint_lambda ( "add_endpoint", lambda_map, ( Bytes.pack double, container_storage ) )
 
 let ratio_endpoint : endpoint_lambda = fun ( argument, container_storage : bytes * container_storage ) ->
 	let argument = unpack_ratio_params argument in
