@@ -16,7 +16,7 @@ let add_endpoint : business_endpoint_lambda = fun ( argument, lambda_map, busine
 let add_double_endpoint : business_endpoint_lambda = fun ( argument, lambda_map, business_storage : bytes * lambda_map * business_storage ) ->
 	let argument = unpack_add_params argument in
 	let double = argument * 2n in
-	run_business_endpoint_lambda ( "add_endpoint", lambda_map, ( Bytes.pack double, lambda_map, business_storage ) )
+	run_business_endpoint_lambda ( "add", lambda_map, ( Bytes.pack double, lambda_map, business_storage ) )
 
 let ratio_endpoint : business_endpoint_lambda = fun ( argument, lambda_map, business_storage : bytes * lambda_map * business_storage ) ->
 	let argument = unpack_ratio_params argument in
