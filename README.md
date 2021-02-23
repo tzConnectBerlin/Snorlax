@@ -8,9 +8,8 @@ We organized the code in a way so that code dependent on business logic is separ
 
 ## How to build:
 
-There are scripts in ./build:
+Use the following scripts in ./build:
 
-* preprocess.sh : Runs the m4 build of a source file, and outputs a monolithic LIGO file in ./tmp
-* compile-contract.sh : Compiles a contract from a given LIGO file, and outputs Michelson to ./bin
-* compile-lambda.sh : Compiles a lambda function from a given LIGO file, and outputs Michelson to ./bin
-* pack-lambda.sh : Compiles a lambda function from a given LIGO file, and outputs a packed bytestream to ./bin
+* compile-contract.sh : Compiles the container contract and places the result in build/bin
+* compile-lambdas.sh : Compiles all lambda functions (both as Michelson snippets and packed hex data) and places the result in build/bin/lazy
+* compile-storage.sh {owner address} : Generates an initial storage with the specified owner address and places the result in build/bin
