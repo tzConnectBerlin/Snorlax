@@ -14,5 +14,7 @@ do
 	lambda_name=${filename_without_extension#*.}
 	echo "Installing ${filename} as ${lambda_name}"
 	tezos-client transfer 0 from alice to snorlax --burn-cap 0.5 \
-		--arg \(Right\(Left\(Left\(Right\(Pair\ \"${lambda_name}\"\ `cat ${f}`\)\)\)\)\)
+		--entrypoint installLambda --arg \(Pair\ \"${lambda_name}\"\ `cat ${f}`\)
 done
+
+tezos-client transfer 0 from alice to snorlax --burn-cap 0.5 --entrypoint sealContract
