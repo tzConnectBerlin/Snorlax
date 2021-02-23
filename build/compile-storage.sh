@@ -6,5 +6,4 @@ echo "Eg. ./compile-storage tmp/main.mligo tz1VSUr8wwNhLAzempoch5d6hLRiTh8Cjcjb"
 exit 1
 fi
 
-ligo compile-storage ${1} main initial_storage --sender=${2}
-
+ligo compile-storage tmp/main.mligo main initial_storage --sender=${2}

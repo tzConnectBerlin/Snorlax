@@ -1,13 +1,12 @@
 #!/bin/bash
 
-if [[ -z "${1}" ]]; then
-echo "Usage: ./compile-contract.sh {file}"
-echo "Eg. ./compile-contact tmp/main.mligo"
-exit 1
-fi
+contract_file="../src/container/main.mligo.m4"
+m4_filename=${contract_file##*/}
+preprocessed_source_filename="${m4_filename%.[^.]*}"
+preprocessed_source_with_path="./tmp/${preprocessed_source_filename}"
 
-filename=${1##*/}
-basename="${filename%.[^.]*}"
+mkdir -p tmp
+./preprocess.sh ${contract_file} ${preprocessed_source_with_path}
 
 mkdir -p bin
-ligo compile-contract ${1} main > bin/${basename}.tz
+ligo compile-contract ${preprocessed_source_with_path} main > bin/main.tz
