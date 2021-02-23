@@ -37,7 +37,7 @@ m4_loadfile(.,storage.mligo.m4) m4_dnl
 //		callback_lambda = ( None : business_endpoint_lambda option );
 //		business_storage = new_storage }
 
-// To be inserted as last element in the callchain (thank you Edo for depth-first ordering!)
+// To be inserted as last element in the callchain (thank you Florence for depth-first ordering!)
 //let callback_invariant_check ( container_storage : container_storage ) : operation list * container_storage =
 //	match container_storage.callback_lambda with
 //	| Some u -> ( failwith err_MISSED_CALLBACK : operation list * container_storage )
