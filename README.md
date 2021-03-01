@@ -1,4 +1,4 @@
-# Snorlax - Lazy functions and typing in LIGO
+# 'Snorlax' - Lazy functions and typing in LIGO
 
 We have developed this framework to overcome the contract size limit in Tezos. The goal is to reduce the size of the main body of the contract, and have business logic in lazily loaded Lambda functions.
 
@@ -6,12 +6,20 @@ The framework relies heavily on the m4 templating language for parametric macros
 
 We organized the code in a way so that code dependent on business logic is separated from generic code powering the lazy loading mechanism.
 
+## Snorlax and Munchlax
+
+We provide you with not one, but two examples. Munchlax is a leaner solution that doesn't allow lambdas to call other lambdas. Snorlax is the full featured real deal. (You might have very good reasons not to use the "full featured real deal" though. Please use your engineer's gut intuition.) The source trees are under their respective folders.
+
 ## How to build and install:
 
-Use the following scripts in ./build:
+* Start the flextesa sandbox by running pull.sh and start.sh in /flextesa
 
-* compile-contract.sh : Compiles the container contract and places the result in build/bin
-* compile-lambdas.sh : Compiles all lambda functions (both as Michelson snippets and packed hex data) and places the result in build/bin/lazy
-* compile-storage.sh {owner address} : Generates an initial storage with the specified owner address and places the result in build/bin
+* Run build.sh in /build
 
-Once everything is built, start the flextesa sandbox with the scripts in ./flextesa, and finally, install the contract and lambdas via install.sh in ./build.
+* Run install.sh in /build
+
+The preprocessed LIGO source files can be inspected under build/tmp, and the Michelson and packed bytestream output can be found under build/bin.
+
+## Disclaimer
+
+I attempted to make this as secure by design as possible, but remember this whole example was built by one person over a week.

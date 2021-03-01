@@ -23,7 +23,6 @@ type lambda_repository =
 type container_storage =
 [@layout:comb]
 {
-//	callback_lambda : business_endpoint_lambda option; // For the next stage of the experiment
 	lambda_repository : lambda_repository;
 	business_storage : business_storage;
 }

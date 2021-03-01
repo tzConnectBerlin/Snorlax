@@ -4,8 +4,9 @@ lazy_folder="./bin/lazy"
 hex_files=${lazy_folder}/*.hex
 
 echo "Installing contract..."
+storage=`cat bin/storage.tz`
 tezos-client originate contract snorlax transferring 0 from alice \
-	running bin/main.tz --init "`cat bin/storage.tz`" --burn-cap 0.5 --force
+	running bin/main.tz --init "${storage//[$'\t\r\n']}" --burn-cap 0.5 --force
 
 for f in ${hex_files}
 do
